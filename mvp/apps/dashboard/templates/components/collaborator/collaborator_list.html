@@ -1,0 +1,43 @@
+<table class="min-w-full">
+    <thead>
+        <tr class="border-b">
+            <th class="px-4 py-2 text-left">Nombre</th>
+            <th class="px-4 py-2 text-left">Cargo</th>
+            <th class="px-4 py-2 text-left">Departamento</th>
+            <th class="px-4 py-2 text-left">Último Chequeo</th>
+            <th class="px-4 py-2 text-left">Próximo Chequeo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for collaborator in collaborators %}
+        <tr class="border-b hover:bg-gray-50">
+            <td class="px-4 py-2">{{ collaborator.first_name }} {{ collaborator.last_name }}</td>
+            <td class="px-4 py-2">{{ collaborator.role.name }}</td>
+            <td class="px-4 py-2">{{ collaborator.department.name }}</td>
+            <td class="px-4 py-2">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-calendar h-4 w-4 mr-2 text-gray-500">
+                        <path d="M8 2v4"></path>
+                        <path d="M16 2v4"></path>
+                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                        <path d="M3 10h18"></path>
+                    </svg>{{ collaborator.last_checkup }}
+                </div>
+            </td>
+            <td class="px-4 py-2">
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-calendar h-4 w-4 mr-2 text-gray-500">
+                        <path d="M8 2v4"></path>
+                        <path d="M16 2v4"></path>
+                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                        <path d="M3 10h18"></path>
+                    </svg>{{ collaborator.next_checkup }}</div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

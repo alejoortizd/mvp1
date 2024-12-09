@@ -1,0 +1,55 @@
+<table class="min-w-full">
+    <thead>
+        <tr class="border-b">
+            <th class="px-4 py-2 text-left">Fecha</th>
+            <th class="px-4 py-2 text-left">Tipo</th>
+            <th class="px-4 py-2 text-left">Descripción</th>
+            <th class="px-4 py-2 text-left">Severidad</th>
+            <th class="px-4 py-2 text-left">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for incident in incidents %}
+        <tr class="border-b hover:bg-gray-50">
+            <td class="px-4 py-2">{{ incident.incident_date }}</td>
+            <td class="px-4 py-2 capitalize">{{ incident.incident_type.name }}</td>
+            <td class="px-4 py-2">{{ incident.description }}</td>
+            <td class="px-4 py-2">
+                {% if incident.severity == 'LOW' %}
+                <span class="px-2 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">
+                    {{ incident.severity }}
+                </span>
+                {% elif incident.severity == 'MEDIUM' %}
+                <span class="px-2 py-1 rounded-full text-sm bg-orange-100 text-orange-800">
+                    {{ incident.severity }}
+                </span>
+                {% else %}
+                <span class="px-2 py-1 rounded-full text-sm bg-red-100 text-red-800">
+                    {{ incident.severity }}
+                </span>
+                {% endif %}
+            </td>
+            <td class="px-4 py-2">
+                <div class="flex items-center">
+                    {% if incident.status == 'OPEN' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-clock h-5 w-5 text-yellow-500">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-check-circle h-5 w-5 text-green-500">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <path d="m9 11 3 3L22 4"></path>
+                    </svg>
+                    {% endif %}
+                    <span class="ml-2 capitalize">{{ incident.status }}</span>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
